@@ -3,6 +3,8 @@ import axios from "axios";
 import "./App.css";
 import User from "./components/User/User";
 import InputForm from "./components/InputForm/InputForm";
+import { Col, Container, Row } from "react-bootstrap";
+// import {Button, Modal} from 'react-bootstrap'
 
 class App extends React.Component {
   constructor() {
@@ -11,6 +13,7 @@ class App extends React.Component {
       names: ["Sparco7", "gagishmagi", "ShaniBel", "leib-ran", "shaharbest"],
       users: [],
       inputUser: "",
+      showModal: false
     };
   }
 
@@ -42,20 +45,30 @@ class App extends React.Component {
     this.setState({ inputUser: "" });
   };
 
+  handleClose = () =>{
+    this.setState({showModal: false})
+  }
+
+  handleShow = () => {
+    this.setState({showModal: true})
+  }
+
   render() {
     return (
-      <div>
-        <div>
+      <Container>
+        <Row>
           <InputForm
             handleUpdateState={this.handleUpdateState}
             addUser={this.addUser}
             inputUser={this.state.inputUser}
           />
-        </div>
+        </Row>
+        <Row xs={1} md={2} className="g-4">
         {this.state.users.map((user, i) => {
-          return <User user={user} key={i} />;
+          return <Col><User user={user} key={i} /></Col>;
         })}
-      </div>
+        </Row>
+      </Container>
     );
   }
 }
