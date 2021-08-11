@@ -1,11 +1,11 @@
-import "./Users.css"
+import "./User.css"
 
 const User = ({ user }) => {
 
   return (
     <div>
       <ul>
-        <img src={user.avatar_url} />
+        <img src={user.avatar_url} alt={user.avatar_url} />
         <li>Username: {user.login}</li>
         <li>Followers: {user.followers}</li>
         <li>Following: {user.following}</li>

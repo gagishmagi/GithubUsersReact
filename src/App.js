@@ -1,8 +1,8 @@
 import React from "react";
-import axios from "../node_modules/axios/dist/axios";
+import axios from "axios";
 import "./App.css";
-import User from "./User";
-import InputForm from "./InputForm";
+import User from "./components/User/User";
+import InputForm from "./components/InputForm/InputForm";
 
 class App extends React.Component {
   constructor() {
@@ -15,17 +15,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // let usersArr = [];
     this.state.names.map((name, i) => {
-      axios
-        .get(`https://api.github.com/users/${name}`)
-        .then((response) => {
-          this.setState({ users: [response.data, ...this.state.users] });
-        })
-        .catch((err) => console.log(err));
+      return this.FetchUser(name)
     });
+  }
 
-    // this.setState({ users: usersArr });
+  FetchUser = (user) => {
+    axios
+      .get(`https://api.github.com/users/${user}`)
+      .then((response) => {
+        this.setState({ users: [response.data, ...this.state.users] });
+      })
+      .catch((err) => console.log("err", err));
   }
 
   handleUpdateState = (e) => {
@@ -36,12 +37,7 @@ class App extends React.Component {
   addUser = () => {
     const user = this.state.inputUser;
 
-    axios
-      .get(`https://api.github.com/users/${user}`)
-      .then((response) => {
-        this.setState({ users: [response.data, ...this.state.users] });
-      })
-      .catch((err) => console.log("err", err));
+    this.FetchUser(user)    
 
     this.setState({ inputUser: "" });
   };
