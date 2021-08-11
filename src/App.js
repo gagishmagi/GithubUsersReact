@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let usersArr = [];
+    // let usersArr = [];
     this.state.names.map((name, i) => {
       axios
         .get(`https://api.github.com/users/${name}`)
@@ -25,7 +25,7 @@ class App extends React.Component {
         .catch((err) => console.log(err));
     });
 
-    this.setState({ users: usersArr });
+    // this.setState({ users: usersArr });
   }
 
   handleUpdateState = (e) => {
